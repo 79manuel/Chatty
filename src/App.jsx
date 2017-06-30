@@ -20,11 +20,17 @@ class App extends Component {
     this.socket = new WebSocket('ws://localhost:3001/');
     this.socket.onmessage = (event) => {
       const newMessage = JSON.parse(event.data);
-      const newMessages = this.state.messages.concat(newMessage);
-      console.log(newMessages)
-      this.setState({
-        messages: newMessages
-      });
+      if (newMessage.type === 'incomingMessage' || newMessage.type === 'incomingNotification') {
+        const newMessages = this.state.messages.concat(newMessage);
+
+        console.log(newMessages)
+        this.setState({
+          messages: newMessages
+        });
+      }
+      if (newMessage.type === 'updateUserCount'){
+        this.setState({userCount: newMessage.userCount})
+      }
     }
   }
 
@@ -36,10 +42,7 @@ class App extends Component {
         username: this.state.currentUser.name,
         content: message
       };
-      //const messages = this.state.messages.concat(newMessage);
-      // this.state.messages.concat(newMessage);
-      //this.setState({messages: messages})
-      console.log("whyyyyyyy")
+
       this.broadcastMessage(JSON.stringify(newMessage));
   }
 
@@ -67,7 +70,7 @@ class App extends Component {
     console.log('rendering App')
     return (
       <div>
-        <Navbar />
+        <Navbar userCount={this.state.userCount}/>
         <MessageList messageList={this.state.messages}/>
         <ChatBar
           username={this.state.currentUser.name}
