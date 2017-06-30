@@ -12,35 +12,55 @@ class App extends Component {
       currentUser: {name: "Mr Fluffyface"},
       messages: []
     };
+    this.makeNewMessage = this.makeNewMessage.bind(this);
+    this.newUserName = this.newUserName.bind(this);
   }
 
-  makeNewMessage = (message) => {
+  componentDidMount() {
+    this.socket = new WebSocket('ws://localhost:3001/');
+    this.socket.onmessage = (event) => {
+      const newMessage = JSON.parse(event.data);
+      const newMessages = this.state.messages.concat(newMessage);
+      console.log(newMessages)
+      this.setState({
+        messages: newMessages
+      });
+    }
+  }
+
+
+  makeNewMessage(message) {
       //console.log(message.message, message.username);
       const newMessage = {
-        username: message.username,
-        content: message.message
+        type: 'postMessage',
+        username: this.state.currentUser.name,
+        content: message
       };
       //const messages = this.state.messages.concat(newMessage);
-      this.state.messages.concat(newMessage);
+      // this.state.messages.concat(newMessage);
       //this.setState({messages: messages})
-      this.broadcastMessage(JSON.stringify(newMessage))
+      console.log("whyyyyyyy")
+      this.broadcastMessage(JSON.stringify(newMessage));
+  }
+
+  newUserName (username) {
+    let previousName = this.state.currentUser.name;
+    this.setState({ currentUser: { name: username } });
+
+    const notification = {
+      type: 'postNotification',
+      username: null,
+      content: `${previousName} changed their name to ${username}`
+    };
+
+    this.broadcastMessage(JSON.stringify(notification));
+    console.log(notification);
   }
 
   broadcastMessage(message) {
     this.socket.send(message);
   }
 
-  componentDidMount() {
-    this.socket = new WebSocket('ws://localhost:3001/');
-    this.socket.addEventListener('message', (event) => {
-      const newMessage = JSON.parse(event.data);
-      const newMessages = this.state.messages.concat(newMessage);
-      console.log("componentdidmountrohit".newMessages);
-      this.setState({
-        messages: newMessages
-      });
-    });
-  }
 
 
   render() {
@@ -50,8 +70,10 @@ class App extends Component {
         <Navbar />
         <MessageList messageList={this.state.messages}/>
         <ChatBar
-          currentUser={this.state.currentUser.name}
-          makeNewMessage={this.makeNewMessage}/>
+          username={this.state.currentUser.name}
+          handleMessage={this.makeNewMessage}
+          newUserName={this.newUserName}
+        />
       </div>
     );
   }

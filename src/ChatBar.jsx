@@ -1,28 +1,27 @@
 import React, {Component} from 'react';
 
-class ChatBar extends Component {
 
-  constructor(props) {
+
+class Chatbar extends Component {
+
+  constructor(props){
     super(props);
-    this.state = {username: this.props.currentUser,
-                  message: ''};
-    this.handleMessageChange = this.handleMessageChange.bind(this);
-    this.handleUsernameChange = this.handleUsernameChange.bind(this);
-    this.onPressEnter = this.onPressEnter.bind(this);
+    //this.state = {username: this.props.currentUser,
+    //              message: ''}
   }
 
-  handleMessageChange(event) {
-    console.log(event);
-    this.setState({message:event.target.value});
+  handleMessageChange = (event) => {
+    if(event.key == 'Enter') {
+      this.props.handleMessage(event.target.value);
+      event.target.value = '';
+    }
   }
-
-  handleUsernameChange(event) {
-    console.log(event);
-    this.setState({username:event.target.value});
+  handleUsernameChange = (event) => {
+    if(event.key == 'Enter') {
+      this.props.newUserName(event.target.value);
+    }
   }
-
-  onPressEnter(event) {
-    console.log(event);
+  onPressEnter = (event) => {
     if(event.key == 'Enter'){
       this.props.makeNewMessage(this.state);
       event.target.value = '';
@@ -30,15 +29,13 @@ class ChatBar extends Component {
   }
 
   render() {
-    console.log('rendering ChatBar...')
+    console.log('rendering Chatbar')
     return (
      <footer className="chatbar">
-
-       <input type='text' className="chatbar-username" placeholder={this.props.currentUser} onChange={this.handleUsernameChange} value={this.state.username} />
-       <input value={this.state.message} className="chatbar-message" placeholder="Type a message and hit  ENTER" onKeyPress={this.onPressEnter} name="message" onChange={this.handleMessageChange} />
-
+       <input className="chatbar-username" defaultValue={this.props.username} onKeyPress={this.handleUsernameChange.bind(this)} />
+       <input className="chatbar-message" placeholder="Type a message and hit  ENTER" name="message" onKeyPress={this.handleMessageChange.bind(this)}/>
     </footer>
     );
   }
 }
-export default ChatBar;
+export default Chatbar;
