@@ -1,6 +1,6 @@
 # Chatty App
 
-Chatty App is a full stack application built with ReactJS, SASS, Webpack with Babel, JSX and ES6. Websockets using Node package 'ws' on the server side, and native Websocket on client side. Chatty will allow users to communicate with each other without having to register accounts. It includes several features like seeing how many users are online and changing the color of different users.
+Chatty App is a full stack application built with ReactJS, SASS, Webpack with Babel, JSX and ES6. Websockets using Node package 'ws' on the server side, and native Websocket on client side. Chatty will allow users to communicate with each other without having to register accounts. It includes several features like seeing how many users are online and changing the color of different users. 
 
 ## Final Product 
 !["Screenshot of Home Page."](https://github.com/79manuel/Chatty/blob/master/docs/Screen%20Shot%20home-page.png?raw=true)
