@@ -1,7 +1,12 @@
-React Boilerplate
-=====================
+# Chatty App
 
-A minimal and light dev environment for ReactJS.
+Chatty App Is Twitter App is a full stack application built with ReactJS, SASS, Webpack with Babel, JSX and ES6. Websockets using Node package 'ws' on the server side, and native Websocket on client side. Chatty will allow users to communicate with each other without having to register accounts. It includes several features like seeing how many users are online and changing the color of different users.
+
+## Final Product 
+!["Screenshot of Home Page. Compose section hidden"](https://github.com/79manuel/tweetr/blob/master/docs/Home%20page%20no%20compose.png?raw=true)
+!["Screenshot of Home Page. Compose new tweet"](https://github.com/79manuel/tweetr/blob/master/docs/home%20page%20compose%20new%20tweet.png?raw=true)
+!["Screenshot of Home Page. New tweet posted"](https://github.com/79manuel/tweetr/blob/master/docs/Home%20page%20post%20new%20tweet.png?raw=true)
+!["Screenshot of Home Page. Hover"](https://github.com/79manuel/tweetr/blob/master/docs/Home%20page%20hover.png?raw=true)
 
 ### Usage
 
