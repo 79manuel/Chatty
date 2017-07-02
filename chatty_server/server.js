@@ -21,14 +21,34 @@ const wss = new SocketServer({ server });
 // Broadcast to all.
 wss.broadcast = function broadcast(data) {
   wss.clients.forEach(function each(client) {
+
     if (client.readyState === WebSocket.OPEN) {
       client.send(data);
     }
   });
 };
 
+var userCountColor =[];
+
+function nameColour(users) {
+  var colours = ['green', 'blue', 'red', 'purple', 'orange'];
+    for (var i = 0; i < users; i++){
+      var currentColour = colours[(users-1) % colours.length]
+    }
+      return currentColour;
+}
+
 function broadcastUsercount(){
-  const message = {type: "updateUserCount", userCount: wss.clients.size}
+
+  const message = {
+    type: "updateUserCount",
+    userCount: wss.clients.size,
+    userColour:nameColour(wss.clients.size),
+    userId:uuidV4()
+
+  };
+  userCountColor.push(message);
+  console.log(userCountColor);
   wss.broadcast (JSON.stringify(message))
 }
 
@@ -42,8 +62,9 @@ wss.on('connection', (ws) => {
     var newMsg = JSON.parse(message);
     newMsg.id = uuidV4();
     if (newMsg.username) {
-      console.log('incoming message')
+      // console.log('incoming message')
       newMsg.type = 'incomingMessage';
+
     } else {
       console.log('incoming notification')
       newMsg.type = 'incomingNotification';

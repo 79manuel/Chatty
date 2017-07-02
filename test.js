@@ -1,37 +1,16 @@
 var React = require('react');
 
-
-var Card = React.createClass({
+var App = React.createClass ({
   getInitialState() {
     return people[0]
   },
-
-
-
-  render() {
-
-
-    return (
-      <div>
-        <h2>{this.state.name}</h2>
-        <img src={this.state.avatar} alt=""/>
-      </div>
-    )
+  render: function() {
+    return {
+    <div>
+    <h1>{this.state.name}</h1>
+    </div>
+    }
   }
-})
+});
 
-var App = React.createClass({
-  render() {
-    return (
-      <div>
-        <Card></Card>
-        <Card></Card>
-        <Card></Card>
-        <Card></Card>
-        <Card></Card>
-      </div>
-    )
-  }
-})
-
-React.render(<App></App>, document.body);
+React.render(<App></App>,document.body);

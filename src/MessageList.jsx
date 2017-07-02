@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import Message from './Message.jsx';
 
 
+
 class MessageList extends Component {
   constructor(props){
     super(props);
@@ -12,7 +13,9 @@ class MessageList extends Component {
            <Message messageContent={message.content}
                  username={message.username}
                  key={message.id}
-                 type={message.type} />
+                 type={message.type}
+                 color={message.color}
+                  />
      );
     return (
     <main className="messages">

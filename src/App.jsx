@@ -9,8 +9,11 @@ class App extends Component {
   constructor(props){
     super(props);
     this.state = {
+
       currentUser: {name: "Mr Fluffyface"},
+      currentUserColor:{color: "green"},
       messages: []
+
     };
     this.makeNewMessage = this.makeNewMessage.bind(this);
     this.newUserName = this.newUserName.bind(this);
@@ -29,19 +32,37 @@ class App extends Component {
         });
       }
       if (newMessage.type === 'updateUserCount'){
-        this.setState({userCount: newMessage.userCount})
+
+        this.setState({
+          userCount: newMessage.userCount, currentUserColor: { color: newMessage.userColour }
+        });
+        //this.setState({ currentUserColor: { color: newMessage.userColour } });
+        // let pickColour = () => {
+        // if (!this.state.currentUser.colour) {
+        //   return newMessage.userColour;
+        // }
+        // else {
+        //   this.state.currentUser.colour;
+        // }
+        // }
+        // this.setState({userCount: newMessage.userCount,
+        //               userColour: newMessage.userColour
+        //               })
       }
     }
   }
 
-
   makeNewMessage(message) {
-      //console.log(message.message, message.username);
+      console.log(this.state.listUsers);
       const newMessage = {
         type: 'postMessage',
         username: this.state.currentUser.name,
-        content: message
+        content: message,
+        userCount: this.state.userCount,
+        color: this.state.currentUserColor.color
+
       };
+      console.log("new message",newMessage);
 
       this.broadcastMessage(JSON.stringify(newMessage));
   }
