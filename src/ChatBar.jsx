@@ -1,7 +1,5 @@
 import React, {Component} from 'react';
 
-
-
 class Chatbar extends Component {
 
   constructor(props){
@@ -16,11 +14,13 @@ class Chatbar extends Component {
       event.target.value = '';
     }
   }
+  
   handleUsernameChange = (event) => {
     if(event.key == 'Enter') {
       this.props.newUserName(event.target.value);
     }
   }
+  
   onPressEnter = (event) => {
     if(event.key == 'Enter'){
       this.props.makeNewMessage(this.state);
