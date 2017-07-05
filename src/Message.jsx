@@ -1,6 +1,5 @@
 import React, {Component} from 'react';
 
-
 class Message extends Component {
   constructor(props){
     super(props);
@@ -10,6 +9,7 @@ class Message extends Component {
       this.classname += ' system'
     }
   }
+  
   render() {
     var styles = {
       color: this.props.color
