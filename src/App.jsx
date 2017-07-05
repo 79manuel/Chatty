@@ -36,18 +36,6 @@ class App extends Component {
         this.setState({
           userCount: newMessage.userCount, currentUserColor: { color: newMessage.userColour }
         });
-        //this.setState({ currentUserColor: { color: newMessage.userColour } });
-        // let pickColour = () => {
-        // if (!this.state.currentUser.colour) {
-        //   return newMessage.userColour;
-        // }
-        // else {
-        //   this.state.currentUser.colour;
-        // }
-        // }
-        // this.setState({userCount: newMessage.userCount,
-        //               userColour: newMessage.userColour
-        //               })
       }
     }
   }
